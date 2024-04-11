@@ -7,13 +7,13 @@ En este caso de un CRUD para products*/
 
 const router = express.Router();
 
-router.post('/', insertProduct)
+router.post('/', logMiddleare('PRODUCT INSET INFO'), insertProduct)
 
-router.get('/', getProducts)
+router.get('/', logMiddleare('ALL PRODUCTS INFO'), getProducts)
 
 router.get('/:id', logMiddleare('PRODUCT INFO'), getProductById)
 
-router.put('/:id', updateProduct)
+router.put('/:id', logMiddleare('UPDATE PRODUCT INFO'), updateProduct)
 
 
 export { router as productsRouter };
