@@ -1,18 +1,18 @@
-import express, { Request, Response } from 'express'
+import express from 'express'
+import { getProductById, getProducts, insertProduct, updateProduct } from '../controllers/products.controller';
+
+/*Utilizamos el router de express para armar nuestros endpoints. 
+En este caso de un CRUD para products*/
 
 const router = express.Router();
 
-router.get('/products', (_req: Request, res: Response) => {
-    res.send('Get All Producst')
-})
+router.post('/products', insertProduct)
 
-router.get('/:id', (_req: Request, _res: Response) => {
+router.get('/products', getProducts)
 
-})
+router.get('/:id', getProductById)
 
-router.put('/:id', (_req: Request, _res: Response) => {
-
-})
+router.put('/:id', updateProduct)
 
 
 export { router as productsRouter };

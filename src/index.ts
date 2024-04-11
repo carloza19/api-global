@@ -9,13 +9,14 @@ import { productsRouter } from './routes'
 const PORT = process.env.PORT || 3001;
 
 const app = express();
-app.use(cors());
-app.use(express.json());
+app.use(cors()); //Ayuda resolver el error de CORS 
+app.use(express.json()); //Premite recibir datos tipo json en el body
 db().then(() => console.log('db connection ready'));
 
-
+// ------- routing
 app.use('/v1', productsRouter);
 
+// ------- port listen
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 })
