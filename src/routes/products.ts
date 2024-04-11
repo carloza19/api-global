@@ -6,9 +6,9 @@ En este caso de un CRUD para products*/
 
 const router = express.Router();
 
-router.post('/products', insertProduct)
+router.post('/', insertProduct)
 
-router.get('/products', getProducts)
+router.get('/', getProducts)
 
 router.get('/:id', getProductById)
 

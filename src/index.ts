@@ -2,7 +2,7 @@ import "dotenv/config"
 import express from 'express'
 import cors from 'cors'
 import db from "./config/mongo"
-import { productsRouter } from './routes'
+import { productsRouter } from './routes/'
 
 
 
@@ -14,7 +14,7 @@ app.use(express.json()); //Premite recibir datos tipo json en el body
 db().then(() => console.log('db connection ready'));
 
 // ------- routing
-app.use('/v1', productsRouter);
+app.use('/v1/products', productsRouter);
 
 // ------- port listen
 app.listen(PORT, () => {

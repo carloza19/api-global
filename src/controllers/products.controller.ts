@@ -43,4 +43,4 @@ const updateProduct = async ({ params, body }: Request, res: Response) => {
 };
 
 
-export { insertProduct,getProducts, getProductById, updateProduct }
+export { insertProduct, getProducts, getProductById, updateProduct }
