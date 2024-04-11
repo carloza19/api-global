@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { handleHttp } from "../utils/error.handle";
 import { getAllProductsService, getProductsByIdService, postProductsService, updateProductsService } from "../services/products.services";
-
+import { filterArrayOfObjects } from "../utils/filterFiles";
 
 const insertProduct = async (req: Request, res: Response) => {
     try {
@@ -13,16 +13,17 @@ const insertProduct = async (req: Request, res: Response) => {
     }
 };
 
-const getProducts = async (_req: Request, res: Response) => {
+const getProducts = async (_req: Request, res: Response): Promise<void> => {
     try {
         const response = await getAllProductsService();
+        console.log('ACA? ', filterArrayOfObjects(response, ["description"]));
         res.send(response);
     } catch (e) {
         handleHttp(res, 'ERROR_GET_PRODUCTS');
     }
 };
 
-const getProductById = async ({ params }: Request, res: Response) => {
+const getProductById = async ({ params }: Request, res: Response): Promise<void> => {
     try {
         const { id } = params;
         const response = await getProductsByIdService(id);
@@ -32,7 +33,7 @@ const getProductById = async ({ params }: Request, res: Response) => {
     }
 };
 
-const updateProduct = async ({ params, body }: Request, res: Response) => {
+const updateProduct = async ({ params, body }: Request, res: Response): Promise<void> => {
     try {
         const { id } = params;
         const response = await updateProductsService(id, body);
