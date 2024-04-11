@@ -4,7 +4,7 @@ const filterArrayOfObjects = (array: Product[], fields: (keyof Product)[]) => {
     return array.map((obj: any) => {
         const newObj: Partial<Product> = {};
         fields.forEach((field: (keyof Product)) => {
-            if (obj.hasOwnProperty(field)) {
+            if (obj.toObject().hasOwnProperty(field)) {
                 newObj[field] = obj[field]
             }
         });
