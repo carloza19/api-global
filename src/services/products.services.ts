@@ -9,7 +9,7 @@ const postProductsService = async (product: Product) => {
 }
 
 const getAllProductsService = (): Promise<Product[]> => {
-    const response = ProductModel.find()
+    const response = ProductModel.find().lean()
     return response
 }
 
