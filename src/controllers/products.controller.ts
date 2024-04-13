@@ -7,7 +7,7 @@ const insertProduct = async (req: Request, res: Response) => {
     try {
         const { body } = req;
         const response = await postProductsService(body);
-        res.send(response);
+        res.status(200).json({ data: response })
     } catch (e) {
         handleHttp(res, 'ERROR_GET_PRODUCTS');
     }
@@ -16,8 +16,8 @@ const insertProduct = async (req: Request, res: Response) => {
 const getProducts = async (_req: Request, res: Response): Promise<void> => {
     try {
         const response = await getAllProductsService();
-        console.log('ACA? ', filterArrayOfObjects(response, ["description"]));
-        res.send(response);
+        filterArrayOfObjects(response, ["description"]);
+        res.status(200).json({ data: response })
     } catch (e) {
         handleHttp(res, 'ERROR_GET_PRODUCTS');
     }
@@ -27,7 +27,7 @@ const getProductById = async ({ params }: Request, res: Response): Promise<void>
     try {
         const { id } = params;
         const response = await getProductsByIdService(id);
-        res.send(response);
+        res.status(200).json({ data: response })
     } catch (e) {
         handleHttp(res, 'ERROR_GET_PRODUCT');
     }
@@ -37,7 +37,7 @@ const updateProduct = async ({ params, body }: Request, res: Response): Promise<
     try {
         const { id } = params;
         const response = await updateProductsService(id, body);
-        res.send(response);
+        res.status(200).json({ data: response })
     } catch (e) {
         handleHttp(res, 'ERROR_UPDATE_PRODUCTS');
     }
