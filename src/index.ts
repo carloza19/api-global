@@ -11,7 +11,9 @@ const app = express();
 app.use(morgan('tiny'));
 app.use(cors()); //Ayuda resolver el error de CORS 
 app.use(express.json()); //Premite recibir datos tipo json en el body
-db()
+db().then(() => console.log('db connection ready')).catch(() => {
+    console.log('db connection fail') 
+})
 
 // ------- routing
 app.use('/v1/products', productsRouter);

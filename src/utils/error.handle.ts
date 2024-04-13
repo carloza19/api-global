@@ -1,11 +1,12 @@
-import { Response } from "express";
 /*Creamos este manejador de errores 
 para unificar y simplificar su repeticiòn en los distinos endpoints*/
 
-const handleHttp = (res: Response, error: string) => {
-    res.status(500)
-    res.send([error])
+const handleHttp = (message: string, status: number, genericError: string) => {
+    return {
+        message:message,
+        status:status,
+        genericError:genericError
+    }
 };
-
 
 export { handleHttp };

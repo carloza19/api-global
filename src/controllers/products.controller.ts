@@ -1,15 +1,16 @@
 import { Request, Response } from "express";
-import { handleHttp } from "../utils/error.handle";
 import { getAllProductsService, getProductsByIdService, postProductsService, updateProductsService } from "../services/products.services";
 import { filterArrayOfObjects } from "../utils/filterFiles";
 
-const insertProduct = async (req: Request, res: Response) => {
+const insertProduct = async (req: Request, res: Response):  Promise<void> => {
     try {
         const { body } = req;
         const response = await postProductsService(body);
         res.status(200).json({ data: response })
     } catch (e) {
-        handleHttp(res, 'ERROR_GET_PRODUCTS');
+        res.json({
+            error: e
+        })
     }
 };
 
@@ -19,7 +20,9 @@ const getProducts = async (_req: Request, res: Response): Promise<void> => {
         filterArrayOfObjects(response, ["description"]);
         res.status(200).json({ data: response })
     } catch (e) {
-        handleHttp(res, 'ERROR_GET_PRODUCTS');
+        res.json({
+            error: e
+        })
     }
 };
 
@@ -27,9 +30,11 @@ const getProductById = async ({ params }: Request, res: Response): Promise<void>
     try {
         const { id } = params;
         const response = await getProductsByIdService(id);
-        res.status(200).json({ data: response })
+        res.status(200).json(response)
     } catch (e) {
-        handleHttp(res, 'ERROR_GET_PRODUCT');
+        res.json({
+            error: e
+        })
     }
 };
 
@@ -37,9 +42,11 @@ const updateProduct = async ({ params, body }: Request, res: Response): Promise<
     try {
         const { id } = params;
         const response = await updateProductsService(id, body);
-        res.status(200).json({ data: response })
+        res.status(200).json(response)
     } catch (e) {
-        handleHttp(res, 'ERROR_UPDATE_PRODUCTS');
+        res.json({
+            error: e
+        })
     }
 };
 
