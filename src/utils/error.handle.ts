@@ -7,9 +7,5 @@ const handleHttp = (res: Response, error: string) => {
     res.send([error])
 };
 
-const handleDB = (res: Response, error: string) => {
-    res.status(500)
-    res.send([error])
-};
 
-export { handleHttp, handleDB };
+export { handleHttp };
