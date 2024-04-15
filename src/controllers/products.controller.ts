@@ -17,8 +17,8 @@ const insertProduct = async (req: Request, res: Response):  Promise<void> => {
 const getProducts = async (_req: Request, res: Response): Promise<void> => {
     try {
         const response = await getAllProductsService();
-        filterArrayOfObjects(response, ["description"]);
-        res.status(200).json({ data: response })
+        const productsFiltred = filterArrayOfObjects(response)
+        res.status(200).json({ data: productsFiltred })
     } catch (e) {
         res.json({
             error: e

@@ -1,17 +1,20 @@
-import { Product } from "../interfaces/product.interface";
+import { Product, ProductFilterResponse, ProductResponse } from "../interfaces/product.interface";
 
-type FieldName = keyof Product;
 
-const filterArrayOfObjects = (array: Product[], fields: FieldName[]) => {
-    return array.map(obj => {
-        const newObj: Partial<Product> = {};
-        fields.forEach((field: (keyof Product)) => {
-            if (obj.hasOwnProperty(field)) {
-                newObj[field] = obj[field] as any;
+
+const filterArrayOfObjects = (array: Product[]): ProductResponse[] => {
+
+    const allowedKeys = new Set(Object.keys(ProductFilterResponse).filter(key => ProductFilterResponse[key as keyof Product]));
+
+    return array.map(product => {
+        const filteredProduct: any = {};
+        for (const key of allowedKeys) {
+            if (key in product) {
+                filteredProduct[key] = product[key as keyof Product];
             }
-        });
-        return newObj;
-    });
+        }
+        return filteredProduct as ProductResponse;
+    })
 }
 
 export { filterArrayOfObjects }
