@@ -11,6 +11,7 @@ export interface Product {
 }
 
 export interface ProductResponse {
+    _id:string,
     title: string,
     description: string,
     img: {
@@ -27,6 +28,7 @@ export type ProductFilterFile = {
 }
 
 export const ProductFilterResponse: ProductFilterFile = {
+    _id:true,
     title: true,
     description: true,
     img: true,
